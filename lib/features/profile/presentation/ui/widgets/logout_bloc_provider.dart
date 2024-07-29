@@ -29,7 +29,7 @@ class LogoutBlocProvider extends StatelessWidget {
             );
             context.pushNamedAndRemoveUntil(
               Routes.loginScreen,
-              predicate: (route) => true,
+              predicate: (route) => false,
             );
             requestLoading = false;
           } else if (state is LogoutFailure) {

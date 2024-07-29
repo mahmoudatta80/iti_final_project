@@ -32,7 +32,7 @@ class RegisterBlocConsumer extends StatelessWidget {
             );
             context.pushNamedAndRemoveUntil(
               Routes.layoutScreen,
-              predicate: (route) => true,
+              predicate: (route) => false,
             );
           });
           requestLoading = false;

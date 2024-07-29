@@ -26,7 +26,7 @@ class LoginBlocConsumer extends StatelessWidget {
           );
           context.pushNamedAndRemoveUntil(
             Routes.layoutScreen,
-            predicate: (route) => true,
+            predicate: (route) => false,
           );
           requestLoading = false;
         } else if (state is LoginFailure) {
