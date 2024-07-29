@@ -45,6 +45,8 @@ dependencies:
   url_launcher: ^6.3.0
   fluttertoast: ^8.2.6
   flutter_native_splash: ^2.4.0
+  dartz: ^0.10.1
+  get_it: ^7.7.0
 
 dev_dependencies:
   flutter_test:

@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iti_final_project/core/routing/app_router.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
 import 'package:iti_final_project/core/themes/my_assets.dart';
+import 'package:iti_final_project/core/utils/dependency_injection.dart';
 
 void main() {
+  setupGetIt();
   runApp(MyApp(appRouter: AppRouter()));
 }
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: Routes.layoutScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

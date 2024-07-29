@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
+import 'package:iti_final_project/core/utils/dependency_injection.dart';
 import 'package:iti_final_project/features/about/about_screen.dart';
 import 'package:iti_final_project/features/carts/presentation/ui/carts_screen.dart';
 import 'package:iti_final_project/features/contact_us/ui/contact_us_screen.dart';
+import 'package:iti_final_project/features/home/presentation/cubit/products_cubit/products_cubit.dart';
 import 'package:iti_final_project/features/layout/ui/layout_screen.dart';
 import 'package:iti_final_project/features/login/presentation/ui/login_screen.dart';
 import 'package:iti_final_project/features/onboarding/ui/onboarding_screen.dart';
@@ -28,7 +31,10 @@ class AppRouter {
         );
       case Routes.layoutScreen:
         return MaterialPageRoute(
-          builder: (_) => const LayoutScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProductsCubit>()..getProducts(),
+            child: const LayoutScreen(),
+          ),
         );
       case Routes.contactUsScreen:
         return MaterialPageRoute(
