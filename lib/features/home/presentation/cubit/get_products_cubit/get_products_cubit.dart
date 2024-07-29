@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iti_final_project/features/home/data/models/product_model.dart';
 import 'package:iti_final_project/features/home/data/repo/home_repo.dart';
 
-part 'products_state.dart';
+part 'get_products_state.dart';
 
-class ProductsCubit extends Cubit<ProductsState> {
+class GetProductsCubit extends Cubit<GetProductsState> {
   final HomeRepo homeRepo;
 
-  ProductsCubit(this.homeRepo) : super(ProductsInitial());
+  GetProductsCubit(this.homeRepo) : super(GetProductsInitial());
 
   Future getProducts() async {
-    emit(ProductsLoading());
+    emit(GetProductsLoading());
     var response = await homeRepo.getProducts();
 
     if (isClosed) {
@@ -19,8 +19,8 @@ class ProductsCubit extends Cubit<ProductsState> {
     }
 
     response.fold(
-      (failure) => emit(ProductsFailure(failure.message)),
-      (products) => emit(ProductsSuccess(products)),
+      (failure) => emit(GetProductsFailure(failure.message)),
+      (products) => emit(GetProductsSuccess(products)),
     );
   }
 }

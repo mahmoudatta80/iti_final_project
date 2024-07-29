@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
-import 'package:iti_final_project/features/layout/models/bottom_nav_bar_model.dart';
+import 'package:iti_final_project/features/layout/data/models/bottom_nav_bar_model.dart';
 
 class CustomBottomNavBarItem extends StatelessWidget {
   final List<BottomNavBarModel> bottomNavBarItems;

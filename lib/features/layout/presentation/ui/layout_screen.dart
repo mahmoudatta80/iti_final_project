@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/features/categories/presentation/ui/categories_screen.dart';
 import 'package:iti_final_project/features/home/presentation/ui/home_screen.dart';
-import 'package:iti_final_project/features/layout/models/bottom_nav_bar_model.dart';
-import 'package:iti_final_project/features/layout/ui/widgets/custom_bottom_nav_bar_item.dart';
+import 'package:iti_final_project/features/layout/data/models/bottom_nav_bar_model.dart';
+import 'package:iti_final_project/features/layout/presentation/ui/widgets/custom_bottom_nav_bar_item.dart';
 import 'package:iti_final_project/features/profile/presentation/ui/profile_screen.dart';
 
 class LayoutScreen extends StatefulWidget {

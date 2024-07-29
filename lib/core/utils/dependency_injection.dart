@@ -3,7 +3,9 @@ import 'package:get_it/get_it.dart';
 import 'package:iti_final_project/core/utils/api_service.dart';
 import 'package:iti_final_project/core/utils/dio_setup.dart';
 import 'package:iti_final_project/features/home/data/repo/home_repo.dart';
-import 'package:iti_final_project/features/home/presentation/cubit/products_cubit/products_cubit.dart';
+import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
+import 'package:iti_final_project/features/layout/data/repo/layout_repo.dart';
+import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -15,14 +17,30 @@ Future<void> setupGetIt() async {
     ),
   );
 
+  // layout
+  getIt.registerLazySingleton<LayoutRepo>(
+    () => LayoutRepo(
+      getIt(),
+    ),
+  );
+
   // home
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(
-        getIt(),
-      ));
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepo(
+      getIt(),
+    ),
+  );
 
   // get products cubit
-  getIt.registerFactory<ProductsCubit>(
-    () => ProductsCubit(
+  getIt.registerFactory<GetProductsCubit>(
+    () => GetProductsCubit(
+      getIt(),
+    ),
+  );
+
+  // get categories cubit
+  getIt.registerFactory<GetCategoriesCubit>(
+    () => GetCategoriesCubit(
       getIt(),
     ),
   );

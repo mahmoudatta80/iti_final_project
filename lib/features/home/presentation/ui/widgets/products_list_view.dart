@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
-import 'package:iti_final_project/features/home/presentation/cubit/products_cubit/products_cubit.dart';
+import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
 
 class ProductsListView extends StatelessWidget {
   const ProductsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductsCubit, ProductsState>(
+    return BlocBuilder<GetProductsCubit, GetProductsState>(
       builder: (context, state) {
-        if (state is ProductsSuccess) {
+        if (state is GetProductsSuccess) {
           return ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -57,7 +57,7 @@ class ProductsListView extends StatelessWidget {
             ),
             itemCount: state.products.length,
           );
-        } else if (state is ProductsFailure) {
+        } else if (state is GetProductsFailure) {
           return Center(
             child: Text(
               state.errorMessage,

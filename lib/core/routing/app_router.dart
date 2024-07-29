@@ -5,8 +5,9 @@ import 'package:iti_final_project/core/utils/dependency_injection.dart';
 import 'package:iti_final_project/features/about/about_screen.dart';
 import 'package:iti_final_project/features/carts/presentation/ui/carts_screen.dart';
 import 'package:iti_final_project/features/contact_us/ui/contact_us_screen.dart';
-import 'package:iti_final_project/features/home/presentation/cubit/products_cubit/products_cubit.dart';
-import 'package:iti_final_project/features/layout/ui/layout_screen.dart';
+import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
+import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
+import 'package:iti_final_project/features/layout/presentation/ui/layout_screen.dart';
 import 'package:iti_final_project/features/login/presentation/ui/login_screen.dart';
 import 'package:iti_final_project/features/onboarding/ui/onboarding_screen.dart';
 import 'package:iti_final_project/features/register/presentation/ui/register_screen.dart';
@@ -31,8 +32,15 @@ class AppRouter {
         );
       case Routes.layoutScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ProductsCubit>()..getProducts(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<GetProductsCubit>()..getProducts(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<GetCategoriesCubit>()..getCategories(),
+              ),
+            ],
             child: const LayoutScreen(),
           ),
         );
