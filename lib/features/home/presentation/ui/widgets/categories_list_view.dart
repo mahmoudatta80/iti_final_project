@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iti_final_project/core/routing/extensions.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
-import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
+import 'package:iti_final_project/core/widgets/custom_shimmer_loading.dart';
+import 'package:iti_final_project/features/home/presentation/ui/widgets/home_categories_loading.dart';
 import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -57,11 +58,7 @@ class CategoriesListView extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: MyColors.mainBlue,
-              ),
-            );
+            return const HomeCategoriesLoading();
           }
         },
       ),

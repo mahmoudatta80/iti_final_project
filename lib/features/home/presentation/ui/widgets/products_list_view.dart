@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
 import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
+import 'package:iti_final_project/features/home/presentation/ui/widgets/products_list_view_loading.dart';
 
 class ProductsListView extends StatelessWidget {
   const ProductsListView({super.key});
@@ -65,11 +66,7 @@ class ProductsListView extends StatelessWidget {
             ),
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: MyColors.mainBlue,
-            ),
-          );
+          return const ProductsListViewLoading();
         }
       },
     );

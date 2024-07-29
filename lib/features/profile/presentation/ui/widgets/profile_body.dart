@@ -6,6 +6,7 @@ import 'package:iti_final_project/core/routing/extensions.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
+import 'package:iti_final_project/core/utils/custom_toasts.dart';
 import 'package:iti_final_project/core/widgets/custom_divider.dart';
 import 'package:iti_final_project/features/profile/presentation/cubit/get_profile_data/get_profile_data_cubit.dart';
 import 'package:iti_final_project/features/profile/presentation/ui/widgets/logout_field.dart';
@@ -45,6 +46,9 @@ class ProfileBody extends StatelessWidget {
                 SizedBox(height: 40.h),
                 ListTile(
                   onTap: () {
+                    CustomToasts.showErrorToast(
+                      errorMessage: 'Cart will be active soon',
+                    );
                     context.pushNamed(Routes.cartsScreen);
                   },
                   title: Text(

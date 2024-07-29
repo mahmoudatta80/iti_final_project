@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
 import 'package:iti_final_project/core/widgets/custom_divider.dart';
+import 'package:iti_final_project/features/home/presentation/ui/widgets/products_list_view_loading.dart';
 import 'package:iti_final_project/features/single_category/presentation/cubit/get_single_category/get_single_category_cubit.dart';
 import 'package:iti_final_project/features/single_category/presentation/ui/widgets/single_category_item.dart';
 
@@ -39,11 +39,7 @@ class _SingleCategoryListViewState extends State<SingleCategoryListView> {
               ),
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: MyColors.mainBlue,
-              ),
-            );
+            return const ProductsListViewLoading();
           }
         },
       ),
