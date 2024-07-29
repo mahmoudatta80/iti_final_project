@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        initialRoute: Routes.loginScreen,
+        initialRoute: Routes.onBoardingScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

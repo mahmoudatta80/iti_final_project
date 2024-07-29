@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:iti_final_project/core/utils/api_service.dart';
@@ -8,6 +9,9 @@ import 'package:iti_final_project/features/layout/data/repo/layout_repo.dart';
 import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
 import 'package:iti_final_project/features/login/data/repo/login_repo.dart';
 import 'package:iti_final_project/features/login/presentation/cubit/login/login_cubit.dart';
+import 'package:iti_final_project/features/register/data/repo/register_repo.dart';
+import 'package:iti_final_project/features/register/presentation/cubit/create_user/create_user_cubit.dart';
+import 'package:iti_final_project/features/register/presentation/cubit/register/register_cubit.dart';
 import 'package:iti_final_project/features/single_category/presentation/cubit/get_single_category/get_single_category_cubit.dart';
 import 'package:iti_final_project/features/single_category/repo/single_category_repo.dart';
 
@@ -73,6 +77,28 @@ Future<void> setupGetIt() async {
   // login cubit
   getIt.registerFactory<LoginCubit>(
     () => LoginCubit(
+      getIt(),
+    ),
+  );
+
+  // register
+  getIt.registerLazySingleton<RegisterRepo>(
+    () => RegisterRepo(
+      FirebaseAuth.instance,
+      FirebaseFirestore.instance,
+    ),
+  );
+
+  // register cubit
+  getIt.registerFactory<RegisterCubit>(
+    () => RegisterCubit(
+      getIt(),
+    ),
+  );
+
+  // register cubit
+  getIt.registerFactory<CreateUserCubit>(
+        () => CreateUserCubit(
       getIt(),
     ),
   );

@@ -11,6 +11,8 @@ import 'package:iti_final_project/features/layout/presentation/ui/layout_screen.
 import 'package:iti_final_project/features/login/presentation/cubit/login/login_cubit.dart';
 import 'package:iti_final_project/features/login/presentation/ui/login_screen.dart';
 import 'package:iti_final_project/features/onboarding/ui/onboarding_screen.dart';
+import 'package:iti_final_project/features/register/presentation/cubit/create_user/create_user_cubit.dart';
+import 'package:iti_final_project/features/register/presentation/cubit/register/register_cubit.dart';
 import 'package:iti_final_project/features/register/presentation/ui/register_screen.dart';
 import 'package:iti_final_project/features/single_category/presentation/cubit/get_single_category/get_single_category_cubit.dart';
 import 'package:iti_final_project/features/single_category/presentation/ui/single_category_screen.dart';
@@ -33,7 +35,17 @@ class AppRouter {
         );
       case Routes.registerScreen:
         return MaterialPageRoute(
-          builder: (_) => const RegisterScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<RegisterCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<CreateUserCubit>(),
+              ),
+            ],
+            child: const RegisterScreen(),
+          ),
         );
       case Routes.layoutScreen:
         return MaterialPageRoute(
