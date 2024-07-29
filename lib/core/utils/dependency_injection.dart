@@ -9,6 +9,9 @@ import 'package:iti_final_project/features/layout/data/repo/layout_repo.dart';
 import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
 import 'package:iti_final_project/features/login/data/repo/login_repo.dart';
 import 'package:iti_final_project/features/login/presentation/cubit/login/login_cubit.dart';
+import 'package:iti_final_project/features/profile/data/repo/profile_repo.dart';
+import 'package:iti_final_project/features/profile/presentation/cubit/get_profile_data/get_profile_data_cubit.dart';
+import 'package:iti_final_project/features/profile/presentation/cubit/logout/logout_cubit.dart';
 import 'package:iti_final_project/features/register/data/repo/register_repo.dart';
 import 'package:iti_final_project/features/register/presentation/cubit/create_user/create_user_cubit.dart';
 import 'package:iti_final_project/features/register/presentation/cubit/register/register_cubit.dart';
@@ -23,6 +26,15 @@ Future<void> setupGetIt() async {
     () => ApiService(
       DioSetup.createAndSetUpDio(),
     ),
+  );
+
+  // firebase
+  getIt.registerLazySingleton<FirebaseAuth>(
+    () => FirebaseAuth.instance,
+  );
+
+  getIt.registerLazySingleton<FirebaseFirestore>(
+    () => FirebaseFirestore.instance,
   );
 
   // layout
@@ -70,7 +82,7 @@ Future<void> setupGetIt() async {
   // login
   getIt.registerLazySingleton<LoginRepo>(
     () => LoginRepo(
-      FirebaseAuth.instance,
+      getIt(),
     ),
   );
 
@@ -84,8 +96,8 @@ Future<void> setupGetIt() async {
   // register
   getIt.registerLazySingleton<RegisterRepo>(
     () => RegisterRepo(
-      FirebaseAuth.instance,
-      FirebaseFirestore.instance,
+      getIt(),
+      getIt(),
     ),
   );
 
@@ -96,9 +108,31 @@ Future<void> setupGetIt() async {
     ),
   );
 
-  // register cubit
+  // create user cubit
   getIt.registerFactory<CreateUserCubit>(
-        () => CreateUserCubit(
+    () => CreateUserCubit(
+      getIt(),
+    ),
+  );
+
+  // profile
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepo(
+      getIt(),
+      getIt(),
+    ),
+  );
+
+  // get profile cubit
+  getIt.registerFactory<GetProfileDataCubit>(
+    () => GetProfileDataCubit(
+      getIt(),
+    ),
+  );
+
+  // logout cubit
+  getIt.registerFactory<LogoutCubit>(
+    () => LogoutCubit(
       getIt(),
     ),
   );

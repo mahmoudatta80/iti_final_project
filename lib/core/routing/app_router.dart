@@ -11,6 +11,7 @@ import 'package:iti_final_project/features/layout/presentation/ui/layout_screen.
 import 'package:iti_final_project/features/login/presentation/cubit/login/login_cubit.dart';
 import 'package:iti_final_project/features/login/presentation/ui/login_screen.dart';
 import 'package:iti_final_project/features/onboarding/ui/onboarding_screen.dart';
+import 'package:iti_final_project/features/profile/presentation/cubit/get_profile_data/get_profile_data_cubit.dart';
 import 'package:iti_final_project/features/register/presentation/cubit/create_user/create_user_cubit.dart';
 import 'package:iti_final_project/features/register/presentation/cubit/register/register_cubit.dart';
 import 'package:iti_final_project/features/register/presentation/ui/register_screen.dart';
@@ -57,6 +58,10 @@ class AppRouter {
               BlocProvider(
                 create: (context) =>
                     getIt<GetCategoriesCubit>()..getCategories(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    getIt<GetProfileDataCubit>()..getProfileData(),
               ),
             ],
             child: const LayoutScreen(),

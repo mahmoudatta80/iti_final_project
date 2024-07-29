@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iti_final_project/core/routing/extensions.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
+import 'package:iti_final_project/core/utils/constant.dart';
+import 'package:iti_final_project/core/utils/shared_preferences.dart';
 
 class OnboardingButton extends StatelessWidget {
   final PageController pageController;
@@ -21,7 +23,9 @@ class OnboardingButton extends StatelessWidget {
             curve: Curves.ease,
           );
         } else {
-          context.pushNamed(Routes.loginScreen);
+          Constants.isFirstTimeToOpenApp = false;
+          MySharedPreferences.setBool('isFirstTimeToOpenApp', false);
+          context.pushNamed(Routes.registerScreen);
         }
       },
       child: const Icon(

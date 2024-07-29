@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:iti_final_project/core/errors/cloud_firestore_failure.dart';
 import 'package:iti_final_project/core/errors/failure.dart';
 import 'package:iti_final_project/core/errors/firebase_auth_failure.dart';
-import 'package:iti_final_project/features/layout/data/models/user_model.dart';
+import 'package:iti_final_project/features/profile/data/models/user_model.dart';
 import 'package:iti_final_project/features/register/data/models/register_request_model.dart';
 
 class RegisterRepo {

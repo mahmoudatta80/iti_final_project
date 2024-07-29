@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
+import 'package:iti_final_project/features/profile/presentation/cubit/get_profile_data/get_profile_data_cubit.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
@@ -13,11 +16,27 @@ class HomeTopBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
       child: Row(
         children: [
-          Text(
-            'Hello Mahmoud ..',
-            style: MyStyles.font22BlackRegular,
+          Expanded(
+            child: BlocBuilder<GetProfileDataCubit, GetProfileDataState>(
+              builder: (context, state) {
+                if (state is GetProfileDataSuccess) {
+                  return Text(
+                    'Hi, ${state.userModel.userName}..',
+                    style: MyStyles.font22BlackRegular,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  );
+                } else {
+                  return Text(
+                    'Hi,',
+                    style: MyStyles.font22BlackRegular,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  );
+                }
+              },
+            ),
           ),
-          const Spacer(),
           FaIcon(
             FontAwesomeIcons.bell,
             color: MyColors.mainBlue,
