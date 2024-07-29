@@ -36,6 +36,7 @@ class HomeBanner extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     child: CustomTextButton(
                       text: 'Go for Dummy !!',
+                      requestLoading: false,
                       backgroundColor: Colors.white,
                       onPressed: () {
                         UrlLauncherService.launchCustomUrl(

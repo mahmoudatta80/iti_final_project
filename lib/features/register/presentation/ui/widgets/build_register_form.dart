@@ -14,7 +14,7 @@ class BuildRegisterForm extends StatefulWidget {
 }
 
 class _BuildRegisterFormState extends State<BuildRegisterForm> {
-  bool passwordIsVisible = true;
+  bool passwordIsVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,10 @@ class _BuildRegisterFormState extends State<BuildRegisterForm> {
       children: [
         const CustomTextFormField(
           text: 'User Name',
+        ),
+        SizedBox(height: 29.h),
+        const CustomTextFormField(
+          text: 'Email',
         ),
         SizedBox(height: 29.h),
         CustomTextFormField(
@@ -60,6 +64,7 @@ class _BuildRegisterFormState extends State<BuildRegisterForm> {
         SizedBox(height: 53.h),
         CustomTextButton(
           text: 'Register',
+          requestLoading: false,
           onPressed: () {
             context.pushNamed(Routes.layoutScreen);
           },

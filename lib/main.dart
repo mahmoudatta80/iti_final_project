@@ -1,11 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iti_final_project/core/routing/app_router.dart';
 import 'package:iti_final_project/core/routing/routes.dart';
 import 'package:iti_final_project/core/themes/my_assets.dart';
 import 'package:iti_final_project/core/utils/dependency_injection.dart';
+import 'package:iti_final_project/core/utils/shared_preferences.dart';
+import 'package:iti_final_project/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MySharedPreferences.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   setupGetIt();
   runApp(MyApp(appRouter: AppRouter()));
 }
@@ -31,7 +39,7 @@ class MyApp extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        initialRoute: Routes.layoutScreen,
+        initialRoute: Routes.loginScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

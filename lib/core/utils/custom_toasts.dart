@@ -24,7 +24,7 @@ class CustomToasts {
       msg: successMessage,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 2,
+      timeInSecForIosWeb: 1,
       backgroundColor: MyColors.mainBlue,
       textColor: Colors.white,
       fontSize: 16.0,

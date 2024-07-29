@@ -35,6 +35,7 @@ class CartsScreen extends StatelessWidget {
                   SizedBox(height: 5.h),
                   const CustomTextButton(
                     text: 'Buy Now',
+                    requestLoading: false,
                   ),
                 ],
               ),

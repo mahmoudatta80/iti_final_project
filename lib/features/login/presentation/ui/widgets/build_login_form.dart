@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iti_final_project/core/routing/extensions.dart';
-import 'package:iti_final_project/core/routing/routes.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
-import 'package:iti_final_project/core/widgets/custom_text_button.dart';
+import 'package:iti_final_project/core/utils/app_regex.dart';
 import 'package:iti_final_project/core/widgets/custom_text_form_field.dart';
+import 'package:iti_final_project/features/login/presentation/cubit/login/login_cubit.dart';
+import 'package:iti_final_project/features/login/presentation/ui/widgets/login_bloc_consumer.dart';
 
 class BuildLoginForm extends StatefulWidget {
   const BuildLoginForm({super.key});
@@ -15,48 +16,62 @@ class BuildLoginForm extends StatefulWidget {
 }
 
 class _BuildLoginFormState extends State<BuildLoginForm> {
-  bool passwordIsVisible = true;
+  bool passwordIsVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomTextFormField(
-          text: 'User Name',
-        ),
-        SizedBox(height: 29.h),
-        CustomTextFormField(
-          text: 'Password',
-          obscureText: !passwordIsVisible,
-          suffixIcon: GestureDetector(
-            onTap: () {
-              passwordIsVisible = !passwordIsVisible;
-              setState(() {});
+    return Form(
+      key: context.read<LoginCubit>().formKey,
+      child: Column(
+        children: [
+          CustomTextFormField(
+            controller: context.read<LoginCubit>().emailController,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Email must not be empty';
+              } else if (!AppRegex.isEmailValid(value)) {
+                return 'Please enter a valid email';
+              }
+              return null;
             },
-            child: Icon(
-              !passwordIsVisible
-                  ? Icons.visibility_outlined
-                  : Icons.visibility_off_outlined,
-              color: MyColors.mainBlue,
+            text: 'Email',
+          ),
+          SizedBox(height: 29.h),
+          CustomTextFormField(
+            controller: context.read<LoginCubit>().passwordController,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Password must not be empty';
+              }
+              return null;
+            },
+            text: 'Password',
+            obscureText: !passwordIsVisible,
+            suffixIcon: GestureDetector(
+              onTap: () {
+                passwordIsVisible = !passwordIsVisible;
+                setState(() {});
+              },
+              child: Icon(
+                !passwordIsVisible
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: MyColors.mainBlue,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: 30.h),
-        Align(
-          alignment: AlignmentDirectional.centerEnd,
-          child: Text(
-            'Forgot Your Password ?',
-            style: MyStyles.font14MainBlueSemiBold,
+          SizedBox(height: 30.h),
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: Text(
+              'Forgot Your Password ?',
+              style: MyStyles.font14MainBlueSemiBold,
+            ),
           ),
-        ),
-        SizedBox(height: 30.h),
-        CustomTextButton(
-          text: 'Login',
-          onPressed: () {
-            context.pushNamed(Routes.layoutScreen);
-          },
-        ),
-      ],
+          SizedBox(height: 30.h),
+          const LoginBlocConsumer(),
+        ],
+      ),
     );
   }
 }

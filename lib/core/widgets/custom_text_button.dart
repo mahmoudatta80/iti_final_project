@@ -7,12 +7,14 @@ class CustomTextButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   final Color? backgroundColor;
+  final bool requestLoading;
 
   const CustomTextButton({
     super.key,
     required this.text,
     this.onPressed,
     this.backgroundColor,
+    required this.requestLoading,
   });
 
   @override
@@ -41,12 +43,18 @@ class CustomTextButton extends StatelessWidget {
           8,
         ),
       ),
-      child: Text(
-        text,
-        style: backgroundColor == null
-            ? MyStyles.font20WhiteSemiBold
-            : MyStyles.font16MainBlueSemiBold,
-      ),
+      child: requestLoading == false
+          ? Text(
+              text,
+              style: backgroundColor == null
+                  ? MyStyles.font20WhiteSemiBold
+                  : MyStyles.font16MainBlueSemiBold,
+            )
+          : const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
     );
   }
 }
