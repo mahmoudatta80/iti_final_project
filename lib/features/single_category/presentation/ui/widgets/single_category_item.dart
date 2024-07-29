@@ -5,9 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iti_final_project/core/themes/my_colors.dart';
 import 'package:iti_final_project/core/themes/my_styles.dart';
 import 'package:iti_final_project/core/widgets/custom_material_button.dart';
+import 'package:iti_final_project/features/home/data/models/product_model.dart';
 
 class SingleCategoryItem extends StatelessWidget {
-  const SingleCategoryItem({super.key});
+  final ProductModel productModel;
+
+  const SingleCategoryItem({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +23,7 @@ class SingleCategoryItem extends StatelessWidget {
       child: Row(
         children: [
           CachedNetworkImage(
-            imageUrl:
-                'https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png',
+            imageUrl: productModel.image,
             fit: BoxFit.fill,
             height: 120.h,
             width: 120.h,
@@ -32,15 +34,17 @@ class SingleCategoryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Essence Mascara Lash Princess',
+                  productModel.title,
                   style: MyStyles.font18BlackSemiBold,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 5.h),
                 Text(
-                  '\$ 100',
+                  '\$ ${productModel.price}',
                   style: MyStyles.font22BlackRegular,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Row(
                   children: [

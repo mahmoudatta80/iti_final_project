@@ -26,7 +26,7 @@ class ProductsListView extends StatelessWidget {
               child: Row(
                 children: [
                   CachedNetworkImage(
-                    imageUrl: state.products[index].images,
+                    imageUrl: state.products[index].image,
                     fit: BoxFit.fill,
                     height: 120.h,
                     width: 120.h,

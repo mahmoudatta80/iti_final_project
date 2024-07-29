@@ -11,6 +11,7 @@ import 'package:iti_final_project/features/layout/presentation/ui/layout_screen.
 import 'package:iti_final_project/features/login/presentation/ui/login_screen.dart';
 import 'package:iti_final_project/features/onboarding/ui/onboarding_screen.dart';
 import 'package:iti_final_project/features/register/presentation/ui/register_screen.dart';
+import 'package:iti_final_project/features/single_category/presentation/cubit/get_single_category/get_single_category_cubit.dart';
 import 'package:iti_final_project/features/single_category/presentation/ui/single_category_screen.dart';
 
 class AppRouter {
@@ -38,7 +39,8 @@ class AppRouter {
                 create: (context) => getIt<GetProductsCubit>()..getProducts(),
               ),
               BlocProvider(
-                create: (context) => getIt<GetCategoriesCubit>()..getCategories(),
+                create: (context) =>
+                    getIt<GetCategoriesCubit>()..getCategories(),
               ),
             ],
             child: const LayoutScreen(),
@@ -49,9 +51,17 @@ class AppRouter {
           builder: (_) => const ContactUsScreen(),
         );
       case Routes.singleCategoryScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SingleCategoryScreen(),
-        );
+        if (arguments is String) {
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<GetSingleCategoryCubit>()
+                ..getSingleCategoryProducts(
+                  arguments,
+                ),
+              child: const SingleCategoryScreen(),
+            ),
+          );
+        }
       case Routes.cartsScreen:
         return MaterialPageRoute(
           builder: (_) => const CartsScreen(),

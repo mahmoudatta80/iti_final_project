@@ -11,7 +11,7 @@ class ApiService {
       '$_baseUrl$endPoint',
       queryParameters: {
         'limit': 10,
-        'select': 'title,price,category,description,images',
+        'select': 'id,title,price,category,description,images',
       },
     );
     return response.data;

@@ -21,7 +21,10 @@ class CategoriesListView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                  context.pushNamed(Routes.singleCategoryScreen);
+                  context.pushNamed(
+                    Routes.singleCategoryScreen,
+                    arguments: state.categories[index].slug,
+                  );
                 },
                 child: Container(
                   decoration: const BoxDecoration(

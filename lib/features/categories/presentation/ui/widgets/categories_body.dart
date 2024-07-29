@@ -21,7 +21,10 @@ class CategoriesBody extends StatelessWidget {
             return ListView.separated(
               itemBuilder: (context, index) => ListTile(
                 onTap: () {
-                  context.pushNamed(Routes.singleCategoryScreen);
+                  context.pushNamed(
+                    Routes.singleCategoryScreen,
+                    arguments: state.categories[index].slug,
+                  );
                 },
                 title: Text(
                   state.categories[index].name,
