@@ -4,4 +4,5 @@ class Constants {
   static String token = MySharedPreferences.getString('token');
   static bool isFirstTimeToOpenApp =
       MySharedPreferences.getBool('isFirstTimeToOpenApp');
+  static String databaseName = 'e-trader.db';
 }

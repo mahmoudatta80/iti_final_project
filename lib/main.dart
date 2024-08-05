@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iti_final_project/core/routing/app_router.dart';
+import 'package:iti_final_project/core/utils/cache_helper.dart';
 import 'package:iti_final_project/core/utils/dependency_injection.dart';
 import 'package:iti_final_project/core/utils/shared_preferences.dart';
 import 'package:iti_final_project/eco_trade_app.dart';
@@ -13,5 +14,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setupGetIt();
+  await getIt.get<CacheHelper>().initDatabase();
   runApp(EcoTradeApp(appRouter: AppRouter()));
 }
