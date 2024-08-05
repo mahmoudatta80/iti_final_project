@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +7,7 @@ import 'package:iti_final_project/core/themes/my_styles.dart';
 import 'package:iti_final_project/core/utils/custom_toasts.dart';
 import 'package:iti_final_project/core/widgets/custom_material_button.dart';
 import 'package:iti_final_project/features/home/data/models/product_model.dart';
+import 'package:iti_final_project/features/single_category/presentation/ui/widgets/favourite_button_bloc_consumer.dart';
 
 class SingleCategoryItem extends StatelessWidget {
   final ProductModel productModel;
@@ -69,17 +69,23 @@ class SingleCategoryItem extends StatelessWidget {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              CustomToasts.showErrorToast(
-                errorMessage: 'Cart will be active soon',
-              );
-            },
-            child: FaIcon(
-              FontAwesomeIcons.cartPlus,
-              color: MyColors.mainBlue,
-              size: 30.sp,
-            ),
+          Column(
+            children: [
+              FavouriteButtonBlocConsumer(productModel: productModel),
+              SizedBox(height: 15.h),
+              InkWell(
+                onTap: () {
+                  CustomToasts.showErrorToast(
+                    errorMessage: 'Cart will be active soon',
+                  );
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.cartPlus,
+                  color: MyColors.mainBlue,
+                  size: 30.sp,
+                ),
+              ),
+            ],
           ),
         ],
       ),

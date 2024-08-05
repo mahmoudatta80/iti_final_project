@@ -32,7 +32,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       text: 'Categories',
     ),
     BottomNavBarModel(
-      icon: FontAwesomeIcons.user,
+      icon: FontAwesomeIcons.solidUser,
       text: 'Profile',
     ),
   ];

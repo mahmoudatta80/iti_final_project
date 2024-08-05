@@ -10,7 +10,7 @@ class ApiService {
     Response response = await _dio.get(
       '$_baseUrl$endPoint',
       queryParameters: {
-        'limit': 10,
+        'limit': 30,
         'select': 'id,title,price,category,description,images',
       },
     );

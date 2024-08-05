@@ -5,6 +5,7 @@ import 'package:iti_final_project/core/utils/dependency_injection.dart';
 import 'package:iti_final_project/features/about/about_screen.dart';
 import 'package:iti_final_project/features/carts/presentation/ui/carts_screen.dart';
 import 'package:iti_final_project/features/contact_us/ui/contact_us_screen.dart';
+import 'package:iti_final_project/features/favourites/presentation/ui/favourites_screen.dart';
 import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
 import 'package:iti_final_project/features/layout/presentation/cubit/get_categories/get_categories_cubit.dart';
 import 'package:iti_final_project/features/layout/presentation/ui/layout_screen.dart';
@@ -90,6 +91,10 @@ class AppRouter {
       case Routes.aboutScreen:
         return MaterialPageRoute(
           builder: (_) => const AboutScreen(),
+        );
+      case Routes.favouritesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const FavouritesScreen(),
         );
     }
     return null;

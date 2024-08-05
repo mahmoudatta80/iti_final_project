@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:iti_final_project/core/utils/api_service.dart';
+import 'package:iti_final_project/core/utils/cache_helper.dart';
 import 'package:iti_final_project/core/utils/dio_setup.dart';
+import 'package:iti_final_project/features/favourites/data/repo/favourites_repo.dart';
+import 'package:iti_final_project/features/favourites/presentation/cubit/get_all_favourites/get_all_favourites_cubit.dart';
+import 'package:iti_final_project/features/favourites/presentation/cubit/toggle_favourite/toggle_favourite_cubit.dart';
 import 'package:iti_final_project/features/home/data/repo/home_repo.dart';
 import 'package:iti_final_project/features/home/presentation/cubit/get_products_cubit/get_products_cubit.dart';
 import 'package:iti_final_project/features/layout/data/repo/layout_repo.dart';
@@ -133,6 +137,32 @@ Future<void> setupGetIt() async {
   // logout cubit
   getIt.registerFactory<LogoutCubit>(
     () => LogoutCubit(
+      getIt(),
+    ),
+  );
+
+  // favourites
+  getIt.registerLazySingleton<CacheHelper>(
+    () => CacheHelper(),
+  );
+
+  // favourite repo
+  getIt.registerLazySingleton<FavouritesRepo>(
+    () => FavouritesRepo(
+      getIt(),
+    ),
+  );
+
+  // get all favourites cubit
+  getIt.registerFactory<GetAllFavouritesCubit>(
+    () => GetAllFavouritesCubit(
+      getIt(),
+    ),
+  );
+
+  // toggle favourites cubit
+  getIt.registerFactory<ToggleFavouriteCubit>(
+    () => ToggleFavouriteCubit(
       getIt(),
     ),
   );
