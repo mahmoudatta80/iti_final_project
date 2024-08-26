@@ -7,15 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iti_final_project/core/routing/app_router.dart';
-import 'package:iti_final_project/eco_trade_app.dart';
+import 'package:iti_final_project/e-commerce.dart';
+import 'package:iti_final_project/helpers/app_router.dart';
 
 import 'package:iti_final_project/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(EcoTradeApp(appRouter: AppRouter()));
+    await tester.pumpWidget(ECommerceApp(appRouter: AppRouter()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
