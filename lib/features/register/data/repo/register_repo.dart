@@ -16,7 +16,7 @@ class RegisterRepo {
     this.firebaseFirestoreInstance,
   );
 
-  Future<Either<Failure, UserModel>> register(
+  Future<Either<Failure, UserCredential>> register(
       RegisterRequestModel registerRequestModel) async {
     try {
       final response =
@@ -26,32 +26,26 @@ class RegisterRepo {
       );
       UserModel userModel = UserModel(
         userName: registerRequestModel.userName,
-        token: response.user?.uid ?? '',
+        token: response.user!.uid,
         email: registerRequestModel.email,
       );
-      return Right(userModel);
+      await createUser(userModel);
+      return Right(response);
     } catch (error) {
       if (error is FirebaseAuthException) {
         return Left(FirebaseAuthFailure.fromFirebaseAuthException(error));
+      } else if (error is FirebaseException) {
+        return Left(CloudFirestoreFailure.fromFirebaseCoreException(error));
       } else {
         return Left(FirebaseAuthFailure(error.toString()));
       }
     }
   }
 
-  Future<Either<Failure, Unit>> createUser(UserModel userModel) async {
-    try {
-      await firebaseFirestoreInstance
-          .collection('users')
-          .doc(userModel.token)
-          .set(userModel.toMap());
-      return const Right(unit);
-    } catch (error) {
-      if (error is FirebaseException) {
-        return Left(CloudFirestoreFailure.fromFirebaseCoreException(error));
-      } else {
-        return Left(CloudFirestoreFailure(error.toString()));
-      }
-    }
+  Future createUser(UserModel userModel) async {
+    await firebaseFirestoreInstance
+        .collection('users')
+        .doc(userModel.token)
+        .set(userModel.toMap());
   }
 }

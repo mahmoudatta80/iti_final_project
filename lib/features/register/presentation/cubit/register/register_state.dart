@@ -1,16 +1,10 @@
-import 'package:iti_final_project/features/profile/data/models/user_model.dart';
-
 abstract class RegisterState {}
 
 class RegisterInitial extends RegisterState {}
 
 class RegisterLoading extends RegisterState {}
 
-class RegisterSuccess extends RegisterState {
-  final UserModel userModel;
-
-  RegisterSuccess(this.userModel);
-}
+class RegisterSuccess extends RegisterState {}
 
 class RegisterFailure extends RegisterState {
   final String errorMessage;

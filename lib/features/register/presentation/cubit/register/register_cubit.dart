@@ -4,6 +4,9 @@ import 'package:iti_final_project/features/register/data/models/register_request
 import 'package:iti_final_project/features/register/data/repo/register_repo.dart';
 import 'package:iti_final_project/features/register/presentation/cubit/register/register_state.dart';
 
+import '../../../../../core/utils/constant.dart';
+import '../../../../../core/utils/shared_preferences.dart';
+
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterRepo registerRepo;
 
@@ -24,10 +27,15 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: passwordController.text,
       ),
     );
+    response.fold((failure) => emit(RegisterFailure(failure.message)),
+        (userCredential) {
+      saveToken(userCredential.user!.uid);
+      emit(RegisterSuccess());
+    });
+  }
 
-    response.fold(
-      (failure) => emit(RegisterFailure(failure.message)),
-      (userModel) => emit(RegisterSuccess(userModel)),
-    );
+  saveToken(String token) {
+    Constants.token = token;
+    MySharedPreferences.setString('token', token);
   }
 }
